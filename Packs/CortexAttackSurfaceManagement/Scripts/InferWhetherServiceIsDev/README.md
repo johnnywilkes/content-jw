@@ -15,10 +15,3 @@ Identify whether the service is a "development" server. Development servers have
 | --- | --- |
 | asm_tags | Array of key-value objects. Each object within the array must contain the keys "Key" and "Value" to be considered. The values associated with those keys can be arbitrary. Example: \[\{"Key": "env", "Value": "dev"\}, \{"Key": "Name", "Value": "ssh-ec2-machine-name"\}\] |
 | active_classifications | Array of strings representing the Xpanse ASM "active classifications" for the service. Example: \["RdpServer", "SelfSignedCertificate"\] |
-
-## Outputs
----
-
-| **Path** | **Description** | **Type** |
-| --- | --- | --- |
-| ASM - Dev Check | whether there is an indication within either \`asm_tags\` or \`active_classifications\` that the described system is used for development | boolean |
