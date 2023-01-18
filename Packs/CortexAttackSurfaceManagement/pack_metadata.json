@@ -42,7 +42,7 @@
         "GCP-Enrichment-Remediation": {
             "mandatory": false,
             "display_name": "GCP Enrichment and Remediation"
-            }
+        }
     },
     "marketplaces": [
         "marketplacev2",

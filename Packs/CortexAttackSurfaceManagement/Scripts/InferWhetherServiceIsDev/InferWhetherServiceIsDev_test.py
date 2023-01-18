@@ -4,7 +4,7 @@ import demistomock as demisto  # noqa: F401
 def test_canonicalize():
     """
     Tests canonicalize() helper function.
-    
+
     Given:
         - (nothing)
     When:
@@ -21,7 +21,7 @@ def test_canonicalize():
 def test_is_dev_according_to_key_value_pairs():
     """
     Tests the "is dev" assessor for key-value pair data.
-    
+
     Given:
         - (nothing)
     When:
@@ -57,7 +57,7 @@ def test_is_dev_according_to_key_value_pairs():
 def test_is_dev_according_to_classifications():
     """
     Tests the "is dev" assessor for Xpanse classification data.
-    
+
     Given:
         - (nothing)
     When:
