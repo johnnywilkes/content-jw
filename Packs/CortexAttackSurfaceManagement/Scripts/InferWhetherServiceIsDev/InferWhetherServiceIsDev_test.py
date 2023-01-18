@@ -2,6 +2,16 @@ import demistomock as demisto  # noqa: F401
 
 
 def test_canonicalize():
+    """
+    Tests canonicalize() helper function.
+    
+    Given:
+        - (nothing)
+    When:
+        - Running the canonicalize method on a string
+    Then:
+        - Checks that extra characters are stripped and result is lowercase
+    """
     from InferWhetherServiceIsDev import _canonicalize_string
     assert _canonicalize_string("BLAH") == "blah"
     assert _canonicalize_string("'BLAH'") == "blah"
@@ -9,6 +19,18 @@ def test_canonicalize():
 
 
 def test_is_dev_according_to_key_value_pairs():
+    """
+    Tests the "is dev" assessor for key-value pair data.
+    
+    Given:
+        - (nothing)
+    When:
+        - Running the is_dev_according_to_key_value_pairs method on key-value data
+    Then:
+        - Checks that we get True when there are indicators of non-production,
+        as long as they aren't also accompanied by a conflicting indicator of
+        being prod
+    """
     from InferWhetherServiceIsDev import is_dev_according_to_key_value_pairs
 
     # dev indicator with varying keys
@@ -33,6 +55,18 @@ def test_is_dev_according_to_key_value_pairs():
 
 
 def test_is_dev_according_to_classifications():
+    """
+    Tests the "is dev" assessor for Xpanse classification data.
+    
+    Given:
+        - (nothing)
+    When:
+        - Running the is_dev_according_to_classifications method on a list
+        of strings
+    Then:
+        - Checks that we get True when the input list contains the DevelopmentEnvironment
+        classification
+    """
     from InferWhetherServiceIsDev import is_dev_according_to_classifications
 
     assert is_dev_according_to_classifications(["SshServer", "DevelopmentEnvironment"])
