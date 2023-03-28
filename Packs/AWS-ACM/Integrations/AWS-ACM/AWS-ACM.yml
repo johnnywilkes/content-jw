@@ -252,6 +252,8 @@ script:
     description: Returns detailed metadata about the specified ACM certificate.
   - name: aws-acm-list-certificates
     arguments:
+    - name: query
+      description: A JMESPath query to use in filtering the response data.
     - name: certificateStatuses
       auto: PREDEFINED
       predefined:

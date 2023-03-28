@@ -115,7 +115,9 @@ def list_certificates(args, aws_client):
     kwargs = {}
     data = []
     includes = {}
-
+    #JW ADDED
+    if args.get('query') is not None:
+        kwargs.update({'query': args.get('query')})
     if args.get('certificateStatuses') is not None:
         kwargs.update({'CertificateStatuses': args.get('certificateStatuses')})
     if args.get('extendedKeyUsage') is not None:
