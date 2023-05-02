@@ -13,24 +13,24 @@ def test_is_dev_according_to_key_value_pairs():
     from InferWhetherServiceIsDev import is_dev_according_to_key_value_pairs
 
     # dev indicator with varying keys
-    assert is_dev_according_to_key_value_pairs([{"Key": "env", "Value": "dev"},
-                                                {"Key": "Name", "Value": "rdp_server"},
-                                                {"Key": "test", "Value": ""}])
-    assert is_dev_according_to_key_value_pairs([{"Key": "ENVIRONMENT", "Value": "TEST"}])
+    assert is_dev_according_to_key_value_pairs([{"key": "env", "value": "dev"},
+                                                {"key": "Name", "value": "rdp_server"},
+                                                {"key": "test", "value": ""}])
+    assert is_dev_according_to_key_value_pairs([{"key": "ENVIRONMENT", "value": "TEST"}])
 
     # pre-prod counts as dev and not as prod
-    assert is_dev_according_to_key_value_pairs([{"Key": "Stage", "Value": "status - preprod"}])
+    assert is_dev_according_to_key_value_pairs([{"key": "Stage", "value": "status - preprod"}])
 
     # no dev indicator
-    assert not is_dev_according_to_key_value_pairs([{"Key": "env", "Value": "prod"}])
-    assert not is_dev_according_to_key_value_pairs([{"Key": "dev", "Value": "my name"}])
+    assert not is_dev_according_to_key_value_pairs([{"key": "env", "value": "prod"}])
+    assert not is_dev_according_to_key_value_pairs([{"key": "dev", "value": "my name"}])
 
     # conflicting indicators
-    assert not is_dev_according_to_key_value_pairs([{"Key": "env", "Value": "prod"},
-                                                    {"Key": "env", "Value": "dev"}])
+    assert not is_dev_according_to_key_value_pairs([{"key": "env", "value": "prod"},
+                                                    {"key": "env", "value": "dev"}])
 
     # extra arguments ok
-    assert is_dev_according_to_key_value_pairs([{"Key": "ENVIRONMENT", "Source": "AWS", "Value": "TEST"}])
+    assert is_dev_according_to_key_value_pairs([{"key": "ENVIRONMENT", "Source": "AWS", "value": "TEST"}])
 
 
 def test_is_dev_according_to_classifications():
@@ -41,12 +41,12 @@ def test_is_dev_according_to_classifications():
 
 
 @pytest.mark.parametrize('in_classifications,in_tags,expected_out_boolean',
-                         [([], [{"Key": "ENV", "Value": "nprd"}], True),
+                         [([], [{"key": "ENV", "value": "nprd"}], True),
                           (["DevelopmentEnvironment"], [], True),
-                          (["DevelopmentEnvironment"], [{"Key": "ENV", "Value": "pprod"}], True),
+                          (["DevelopmentEnvironment"], [{"key": "ENV", "value": "pprod"}], True),
                           ([], [], False),
                           # unexpected format and/or missing fields yield False & no errors
-                          ([], [{"key": "ENV", "value": "dev"}], False),
+                          ([], [{"key": "ENV", "value": "dev"}], True),
                           (None, [], False),
                           ([], None, False),
                           (None, None, False)])

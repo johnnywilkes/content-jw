@@ -25,10 +25,10 @@ def test_get_asm_args(mocker):
     assert isinstance(result, dict)
     assert result["asmdatacollection"] == [
         {
-            "Answerer": "fake_user@domain.com",
-            "Options": "NoAutomatedRemediation",
-            "Selected": "File a ServiceNow Ticket",
-            "Timestamp": "1666033665586",
+            "answerer": "fake_user@domain.com",
+            "options": "NoAutomatedRemediation",
+            "selected": "File a ServiceNow Ticket",
+            "timestamp": "1666033665586",
         }
     ]
 

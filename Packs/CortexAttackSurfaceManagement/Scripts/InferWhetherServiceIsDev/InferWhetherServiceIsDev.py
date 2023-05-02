@@ -37,11 +37,11 @@ def is_dev_according_to_key_value_pairs(observed_key_value_pairs: List[Dict[str,
 
     Args:
         observed_key_value_pairs (List[Dict[str, Any]]): list of key-value dictionaries;
-            each dictionary within the list must contain the keys "Key" and "Value";
+            each dictionary within the list must contain the keys "key" and "value";
             the values are arbitrary
             Example value for `observed_key_value_pairs`:
-                [{"Key": "env", "Source": "AWS", "Value": "dev"},
-                 {"Key": "Name", "Source": "AWS", "Value": "ssh-ec2-machine-name"}]
+                [{"key": "env", "Source": "AWS", "value": "dev"},
+                 {"key": "Name", "Source": "AWS", "value": "ssh-ec2-machine-name"}]
 
     Returns:
         bool: whether `observed_key_value_pairs` indicates that the described system is
@@ -55,11 +55,11 @@ def is_dev_according_to_key_value_pairs(observed_key_value_pairs: List[Dict[str,
         if not isinstance(kv_pair, Mapping):
             demisto.info(f"Ignoring item because it is not a mapping: {kv_pair}")
         else:
-            if "Key" not in kv_pair or "Value" not in kv_pair:
-                demisto.info(f"Ignoring item because it lacks the keys 'Key' and/or 'Value': {sorted(kv_pair.keys())}")
+            if "key" not in kv_pair or "value" not in kv_pair:
+                demisto.info(f"Ignoring item because it lacks the keys 'key' and/or 'value': {sorted(kv_pair.keys())}")
             else:
-                key = _canonicalize_string(kv_pair.get("Key", ""))
-                value = _canonicalize_string(kv_pair.get("Value", ""))
+                key = _canonicalize_string(kv_pair.get("key", ""))
+                value = _canonicalize_string(kv_pair.get("value", ""))
 
                 if ("env" in key) or (key in ("stage", "function", "lifecycle", "usage", "tier")):
                     if (("dev" in value and "devops" not in value)
@@ -114,11 +114,11 @@ def main():
 
     Args:
         asm_tags (List[Dict[str, Any]]): list of key-value dictionaries;
-            each dictionary within the list must contain the keys "Key" and "Value";
+            each dictionary within the list must contain the keys "key" and "value";
             the values are arbitrary
             Example value for `observed_key_value_pairs`:
-                [{"Key": "env", "Source": "AWS", "Value": "dev"},
-                 {"Key": "Name", "Source": "AWS", "Value": "ssh-ec2-machine-name"}]
+                [{"key": "env", "Source": "AWS", "value": "dev"},
+                 {"key": "Name", "Source": "AWS", "value": "ssh-ec2-machine-name"}]
         active_classifications (List[str]): list of Xpanse ASM classification terms
             (a defined vocabulary)
             Example value for `classifications`:

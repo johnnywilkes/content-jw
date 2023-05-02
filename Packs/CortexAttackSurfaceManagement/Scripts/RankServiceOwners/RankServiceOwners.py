@@ -15,13 +15,13 @@ def score(owners: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     Owner score is the number of observations on that owner divided by the max number of observations
     for any owner in the list
 
-    Expects `Count` key and replaces it with `Ranking Score`
+    Expects `count` key and replaces it with `ranking score`
     """
     if owners:
-        max_count = max(owner.get('Count', 1) for owner in owners)
+        max_count = max(owner.get('count', 1) for owner in owners)
         for owner in owners:
-            count = owner.pop('Count', 1)
-            owner['Ranking Score'] = count / max_count
+            count = owner.pop('count', 1)
+            owner['ranking score'] = count / max_count
     return owners
 
 
@@ -31,34 +31,34 @@ def rank(owners: List[Dict[str, Any]], k: int = 5) -> List[Dict[str, Any]]:
     """
     if k <= 0:
         raise ValueError(f'Number of owners k={k} must be greater than zero')
-    return sorted(owners, key=lambda x: x['Ranking Score'])[:k]
+    return sorted(owners, key=lambda x: x['ranking score'])[:k]
 
 
 def justify(owners: List[Dict[str, str]]) -> List[Dict[str, str]]:
     """
-    For now, `Justification` is the same as `Source`; in the future, will sophisticate
+    For now, `justification` is the same as `source`; in the future, will sophisticate
     """
     for owner in owners:
-        owner['Justification'] = owner.get('Source', '')
+        owner['justification'] = owner.get('source', '')
     return owners
 
 
 def _canonicalize(owner: Dict[str, Any]) -> Dict[str, Any]:
     """
     Canonicalizes an owner dictionary and adds a deduplication key
-    `Canonicalization` whose value is either:
+    `canonicalization` whose value is either:
         1. whitespace-stripped and lower-cased email, if email exists
         2. whitespace-stripped and lower-cased name
         3. empty string if neither exists
     """
-    if owner.get('Email', ''):
-        owner['Canonicalization'] = owner['Email'].strip().lower()
-        owner['Email'] = owner['Canonicalization']
-    elif owner.get('Name', ''):
-        owner['Canonicalization'] = owner['Name'].strip().lower()
-        owner['Name'] = owner['Canonicalization']
+    if owner.get('email', ''):
+        owner['canonicalization'] = owner['email'].strip().lower()
+        owner['email'] = owner['canonicalization']
+    elif owner.get('name', ''):
+        owner['canonicalization'] = owner['name'].strip().lower()
+        owner['name'] = owner['canonicalization']
     else:
-        owner['Canonicalization'] = ''
+        owner['canonicalization'] = ''
     return owner
 
 
@@ -89,37 +89,37 @@ def aggregate(owners: List[Dict[str, str]]) -> List[Dict[str, Any]]:
     If type is neither of the above, all values of that key will be dropped from the aggregated owner.
     """
     deduped = []
-    sorted_owners = sorted(owners, key=lambda owner: owner['Canonicalization'])
-    for key, group in groupby(sorted_owners, key=lambda owner: owner['Canonicalization']):
+    sorted_owners = sorted(owners, key=lambda owner: owner['canonicalization'])
+    for key, group in groupby(sorted_owners, key=lambda owner: owner['canonicalization']):
         duplicates = list(group)
-        email = duplicates[0].get('Email', '')
+        email = duplicates[0].get('email', '')
         # the if condition in the list comprehension below defends against owners whose Name value is None (not sortable)
         names = sorted(
-            [owner.get('Name', '') for owner in duplicates if owner.get('Name')],
+            [owner.get('name', '') for owner in duplicates if owner.get('name')],
             key=lambda x: len(x), reverse=True
         )
         name = names[0] if names else ''
         # aggregate Source by union
         source = ' | '.join(sorted(
-            set(owner.get('Source', '') for owner in duplicates if owner.get('Source', ''))
+            set(owner.get('source', '') for owner in duplicates if owner.get('source', ''))
         ))
         # take max Timestamp if there's at least one; else empty string
         timestamps = sorted(
-            [owner.get('Timestamp', '') for owner in duplicates if owner.get('Timestamp', '')], reverse=True
+            [owner.get('timestamp', '') for owner in duplicates if owner.get('timestamp', '')], reverse=True
         )
         timestamp = timestamps[0] if timestamps else ''
         owner = {
-            'Name': name,
-            'Email': email,
-            'Source': source,
-            'Timestamp': timestamp,
-            'Count': len(duplicates)
+            'name': name,
+            'email': email,
+            'source': source,
+            'timestamp': timestamp,
+            'count': len(duplicates)
         }
 
         # aggregate remaining keys according to type
         all_keys = set(k for owner in duplicates for k in owner.keys())
         keys_to_types = {k: type(owner[k]) for owner in duplicates for k in owner.keys()}
-        other_keys = all_keys - {'Name', 'Email', 'Source', 'Timestamp', 'Canonicalization'}
+        other_keys = all_keys - {'name', 'email', 'source', 'timestamp', 'canonicalization'}
         for other in other_keys:
             if keys_to_types[other] == str:
                 # union over strings

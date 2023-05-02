@@ -10,15 +10,15 @@ from contextlib import nullcontext as does_not_raise
     (
         [
             {
-                'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1',
-                'Timestamp': '', 'Ranking Score': 1, 'Justification': 'source1'
+                'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1',
+                'timestamp': '', 'ranking score': 1, 'justification': 'source1'
             },
         ],
         1,
         [
             {
-                'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1',
-                'Timestamp': '', 'Ranking Score': 1, 'Justification': 'source1'
+                'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1',
+                'timestamp': '', 'ranking score': 1, 'justification': 'source1'
             },
         ],
         does_not_raise(),
@@ -26,8 +26,8 @@ from contextlib import nullcontext as does_not_raise
     (
         [
             {
-                'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1',
-                'Timestamp': '', 'Ranking Score': 1, 'Justification': 'source1'
+                'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1',
+                'timestamp': '', 'ranking score': 1, 'justification': 'source1'
             },
         ],
         0,
@@ -37,8 +37,8 @@ from contextlib import nullcontext as does_not_raise
     (
         [
             {
-                'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1',
-                'Timestamp': '', 'Ranking Score': 1, 'Justification': 'source1'
+                'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1',
+                'timestamp': '', 'ranking score': 1, 'justification': 'source1'
             },
         ],
         -1,
@@ -47,7 +47,7 @@ from contextlib import nullcontext as does_not_raise
     ),
     (
         [
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': ''},
+            {'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': ''},
         ],
         1,
         None,
@@ -62,19 +62,19 @@ def test_rank(owners, k, expected_out, expected_raises):
 @pytest.mark.parametrize('owner,expected_out', [
     # email with casing, whitespace
     (
-        {'Name': 'Alice ', 'Email': 'aLiCe@example.com ', 'Source': 'source1', 'Timestamp': '1'},
-        {'Name': 'Alice ', 'Email': 'alice@example.com', 'Source': 'source1', 'Timestamp': '1',
-         'Canonicalization': 'alice@example.com'},
+        {'name': 'Alice ', 'email': 'aLiCe@example.com ', 'source': 'source1', 'timestamp': '1'},
+        {'name': 'Alice ', 'email': 'alice@example.com', 'source': 'source1', 'timestamp': '1',
+         'canonicalization': 'alice@example.com'},
     ),
     # name with casing, whitespace
     (
-        {'Name': 'Alice ', 'Email': '', 'Source': 'source1', 'Timestamp': '1'},
-        {'Name': 'alice', 'Email': '', 'Source': 'source1', 'Timestamp': '1', 'Canonicalization': 'alice'},
+        {'name': 'Alice ', 'email': '', 'source': 'source1', 'timestamp': '1'},
+        {'name': 'alice', 'email': '', 'source': 'source1', 'timestamp': '1', 'canonicalization': 'alice'},
     ),
     # neither
     (
-        {'Name': '', 'Email': '', 'Source': 'source1', 'Timestamp': '1'},
-        {'Name': '', 'Email': '', 'Source': 'source1', 'Timestamp': '1', 'Canonicalization': ''},
+        {'name': '', 'email': '', 'source': 'source1', 'timestamp': '1'},
+        {'name': '', 'email': '', 'source': 'source1', 'timestamp': '1', 'canonicalization': ''},
     ),
 ])
 def test_canonicalize(owner, expected_out):
@@ -85,78 +85,78 @@ def test_canonicalize(owner, expected_out):
     # same email, different names, sources, timestamps
     (
         [
-            {'Name': 'Alice ', 'Email': 'alice@example.com', 'Source': 'source1', 'Timestamp': '1',
-             'Canonicalization': 'alice@example.com'},
-            {'Name': 'Bob ', 'Email': 'alice@example.com', 'Source': 'source2', 'Timestamp': '2',
-             'Canonicalization': 'alice@example.com'},
+            {'name': 'Alice ', 'email': 'alice@example.com', 'source': 'source1', 'timestamp': '1',
+             'canonicalization': 'alice@example.com'},
+            {'name': 'Bob ', 'email': 'alice@example.com', 'source': 'source2', 'timestamp': '2',
+             'canonicalization': 'alice@example.com'},
         ],
         [
-            {'Name': 'Alice ', 'Email': 'alice@example.com', 'Source': 'source1 | source2', 'Timestamp': '2', 'Count': 2},
+            {'name': 'Alice ', 'email': 'alice@example.com', 'source': 'source1 | source2', 'timestamp': '2', 'count': 2},
         ]
     ),
     # same email, no names
     (
         [
-            {'Name': '', 'Email': 'alice@example.com', 'Source': 'source1', 'Timestamp': '1',
-             'Canonicalization': 'alice@example.com'},
-            {'Name': '', 'Email': 'alice@example.com', 'Source': 'source1', 'Timestamp': '1',
-             'Canonicalization': 'alice@example.com'},
+            {'name': '', 'email': 'alice@example.com', 'source': 'source1', 'timestamp': '1',
+             'canonicalization': 'alice@example.com'},
+            {'name': '', 'email': 'alice@example.com', 'source': 'source1', 'timestamp': '1',
+             'canonicalization': 'alice@example.com'},
         ],
         [
-            {'Name': '', 'Email': 'alice@example.com', 'Source': 'source1', 'Timestamp': '1', 'Count': 2},
+            {'name': '', 'email': 'alice@example.com', 'source': 'source1', 'timestamp': '1', 'count': 2},
         ]
     ),
     # same email, same names
     (
         [
-            {'Name': 'Alice', 'Email': 'alice@example.com', 'Source': 'source1', 'Timestamp': '1',
-             'Canonicalization': 'alice@example.com'},
-            {'Name': 'Alice', 'Email': 'bob@example.com', 'Source': 'source2', 'Timestamp': '2',
-             'Canonicalization': 'bob@example.com'},
-            {'Name': 'Alice', 'Email': 'alice@example.com', 'Source': 'source2', 'Timestamp': '2',
-             'Canonicalization': 'alice@example.com'},
+            {'name': 'Alice', 'email': 'alice@example.com', 'source': 'source1', 'timestamp': '1',
+             'canonicalization': 'alice@example.com'},
+            {'name': 'Alice', 'email': 'bob@example.com', 'source': 'source2', 'timestamp': '2',
+             'canonicalization': 'bob@example.com'},
+            {'name': 'Alice', 'email': 'alice@example.com', 'source': 'source2', 'timestamp': '2',
+             'canonicalization': 'alice@example.com'},
         ],
         [
-            {'Name': 'Alice', 'Email': 'alice@example.com', 'Source': 'source1 | source2', 'Timestamp': '2', 'Count': 2},
-            {'Name': 'Alice', 'Email': 'bob@example.com', 'Source': 'source2', 'Timestamp': '2', 'Count': 1},
+            {'name': 'Alice', 'email': 'alice@example.com', 'source': 'source1 | source2', 'timestamp': '2', 'count': 2},
+            {'name': 'Alice', 'email': 'bob@example.com', 'source': 'source2', 'timestamp': '2', 'count': 1},
         ]
     ),
     # no email, different names
     (
         [
-            {'Name': 'alice', 'Email': '', 'Source': 'source1', 'Timestamp': '1', 'Canonicalization': 'alice'},
-            {'Name': 'bob', 'Email': '', 'Source': 'source2', 'Timestamp': '2', 'Canonicalization': 'bob'},
+            {'name': 'alice', 'email': '', 'source': 'source1', 'timestamp': '1', 'canonicalization': 'alice'},
+            {'name': 'bob', 'email': '', 'source': 'source2', 'timestamp': '2', 'canonicalization': 'bob'},
         ],
         [
-            {'Name': 'alice', 'Email': '', 'Source': 'source1', 'Timestamp': '1', 'Count': 1},
-            {'Name': 'bob', 'Email': '', 'Source': 'source2', 'Timestamp': '2', 'Count': 1},
+            {'name': 'alice', 'email': '', 'source': 'source1', 'timestamp': '1', 'count': 1},
+            {'name': 'bob', 'email': '', 'source': 'source2', 'timestamp': '2', 'count': 1},
         ]
     ),
     # no email, same names
     (
         [
-            {'Name': 'alice', 'Email': '', 'Source': 'source1', 'Timestamp': '1', 'Canonicalization': 'alice'},
-            {'Name': 'alice', 'Email': '', 'Source': 'source2', 'Timestamp': '2', 'Canonicalization': 'alice'},
+            {'name': 'alice', 'email': '', 'source': 'source1', 'timestamp': '1', 'canonicalization': 'alice'},
+            {'name': 'alice', 'email': '', 'source': 'source2', 'timestamp': '2', 'canonicalization': 'alice'},
         ],
         [
-            {'Name': 'alice', 'Email': '', 'Source': 'source1 | source2', 'Timestamp': '2', 'Count': 2},
+            {'name': 'alice', 'email': '', 'source': 'source1 | source2', 'timestamp': '2', 'count': 2},
         ]
     ),
     # some emails present, others missing
     (
         [
-            {'Name': 'Alice', 'Email': 'alice@example.com', 'Source': 'source1', 'Timestamp': '1',
-             'Canonicalization': 'alice@example.com'},
-            {'Name': 'alice', 'Email': '', 'Source': 'source3', 'Timestamp': '3',
-             'Canonicalization': 'alice'},
-            {'Name': 'Bob', 'Email': 'alice@example.com', 'Source': 'source2', 'Timestamp': '2',
-             'Canonicalization': 'alice@example.com'},
-            {'Name': 'alice', 'Email': '', 'Source': 'source4', 'Timestamp': '4',
-             'Canonicalization': 'alice'},
+            {'name': 'Alice', 'email': 'alice@example.com', 'source': 'source1', 'timestamp': '1',
+             'canonicalization': 'alice@example.com'},
+            {'name': 'alice', 'email': '', 'source': 'source3', 'timestamp': '3',
+             'canonicalization': 'alice'},
+            {'name': 'Bob', 'email': 'alice@example.com', 'source': 'source2', 'timestamp': '2',
+             'canonicalization': 'alice@example.com'},
+            {'name': 'alice', 'email': '', 'source': 'source4', 'timestamp': '4',
+             'canonicalization': 'alice'},
         ],
         [
-            {'Name': 'Alice', 'Email': 'alice@example.com', 'Source': 'source1 | source2', 'Timestamp': '2', 'Count': 2},
-            {'Name': 'alice', 'Email': '', 'Source': 'source3 | source4', 'Timestamp': '4', 'Count': 2},
+            {'name': 'Alice', 'email': 'alice@example.com', 'source': 'source1 | source2', 'timestamp': '2', 'count': 2},
+            {'name': 'alice', 'email': '', 'source': 'source3 | source4', 'timestamp': '4', 'count': 2},
         ]
     ),
     # empty input
@@ -173,23 +173,23 @@ def test_aggregate(owners, expected_out):
     # equal counts
     (
         [
-            {'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1 | source2', 'Timestamp': '2', 'Count': 2},
-            {'Name': 'aa', 'Email': '', 'Source': 'source3 | source4', 'Timestamp': '4', 'Count': 2},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1 | source2', 'timestamp': '2', 'count': 2},
+            {'name': 'aa', 'email': '', 'source': 'source3 | source4', 'timestamp': '4', 'count': 2},
         ],
         [
-            {'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1 | source2', 'Timestamp': '2', 'Ranking Score': 1.0},
-            {'Name': 'aa', 'Email': '', 'Source': 'source3 | source4', 'Timestamp': '4', 'Ranking Score': 1.0},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1 | source2', 'timestamp': '2', 'ranking score': 1.0},
+            {'name': 'aa', 'email': '', 'source': 'source3 | source4', 'timestamp': '4', 'ranking score': 1.0},
         ]
     ),
     # unequal counts
     (
         [
-            {'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '2', 'Count': 1},
-            {'Name': 'aa', 'Email': '', 'Source': 'source3 | source4', 'Timestamp': '4', 'Count': 2},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '2', 'count': 1},
+            {'name': 'aa', 'email': '', 'source': 'source3 | source4', 'timestamp': '4', 'count': 2},
         ],
         [
-            {'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '2', 'Ranking Score': 0.5},
-            {'Name': 'aa', 'Email': '', 'Source': 'source3 | source4', 'Timestamp': '4', 'Ranking Score': 1.0},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '2', 'ranking score': 0.5},
+            {'name': 'aa', 'email': '', 'source': 'source3 | source4', 'timestamp': '4', 'ranking score': 1.0},
         ]
     ),
     # empty owners
@@ -206,13 +206,13 @@ def test_score(deduplicated, expected_out):
     # ideal input
     (
         [
-            {'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1'},
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1'},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1'},
+            {'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1'},
         ],
         [
             {
-                'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1',
-                'Ranking Score': 1.0, 'Justification': 'source1'
+                'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
+                'ranking score': 1.0, 'justification': 'source1'
             },
         ]
     ),
@@ -224,65 +224,65 @@ def test_score(deduplicated, expected_out):
     # ideal input with new string field added
     (
         [
-            {'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1', 'New Field': 'val1'},
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1', 'New Field': 'val2'},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1', 'new field': 'val1'},
+            {'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1', 'new field': 'val2'},
         ],
         [
             {
-                'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1',
-                'Ranking Score': 1, 'Justification': 'source1', 'New Field': 'val1 | val2'
+                'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
+                'ranking score': 1, 'justification': 'source1', 'new field': 'val1 | val2'
             },
         ]
     ),
     # ideal input with new numerical field added
     (
         [
-            {'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1', 'New Field': 1},
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1', 'New Field': 2},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1', 'new field': 1},
+            {'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1', 'new field': 2},
         ],
         [
             {
-                'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1',
-                'Ranking Score': 1, 'Justification': 'source1', 'New Field': 2,
+                'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
+                'ranking score': 1, 'justification': 'source1', 'new field': 2,
             },
         ]
     ),
     # ideal input with some new field values added
     (
         [
-            {'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1', 'New Field': 1},
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1'},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1', 'new field': 1},
+            {'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1'},
         ],
         [
             {
-                'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1',
-                'Ranking Score': 1, 'Justification': 'source1', 'New Field': 1,
+                'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
+                'ranking score': 1, 'justification': 'source1', 'new field': 1,
             },
         ]
     ),
     # ideal input with some new field values added
     (
         [
-            {'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1', 'New Field': 'val1'},
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1'},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1', 'new field': 'val1'},
+            {'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1'},
         ],
         [
             {
-                'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1',
-                'Ranking Score': 1, 'Justification': 'source1', 'New Field': 'val1',
+                'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
+                'ranking score': 1, 'justification': 'source1', 'new field': 'val1',
             },
         ]
     ),
     # ideal input with some new field values added that we can't handle
     (
         [
-            {'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1', 'New Field': None},
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1'},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1', 'new field': None},
+            {'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1'},
         ],
         [
             {
-                'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1',
-                'Ranking Score': 1, 'Justification': 'source1',
+                'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
+                'ranking score': 1, 'justification': 'source1',
             },
         ]
     ),
@@ -296,112 +296,112 @@ def test_score(deduplicated, expected_out):
         [None],
         []
     ),
-    # bad input -- Name is None
+    # bad input -- name is None
     (
         [
-            {'Name': None, 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1'},
+            {'name': None, 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1'},
         ],
         [
             {
-                'Name': '', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1',
-                'Ranking Score': 1, 'Justification': 'source1'
+                'name': '', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
+                'ranking score': 1, 'justification': 'source1'
             },
         ]
     ),
-    # bad input -- Email is None
+    # bad input -- email is None
     (
         [
-            {'Name': 'a', 'Email': None, 'Source': 'source1', 'Timestamp': '1'},
+            {'name': 'a', 'email': None, 'source': 'source1', 'timestamp': '1'},
         ],
         [
             {
-                'Name': 'a', 'Email': None, 'Source': 'source1', 'Timestamp': '1',
-                'Ranking Score': 1, 'Justification': 'source1'
+                'name': 'a', 'email': None, 'source': 'source1', 'timestamp': '1',
+                'ranking score': 1, 'justification': 'source1'
             },
         ]
     ),
-    # bad input -- Source is None
+    # bad input -- source is None
     (
         [
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Source': None, 'Timestamp': '1'},
+            {'name': 'a', 'email': 'email1@gmail.com', 'source': None, 'timestamp': '1'},
         ],
         [
             {
-                'Name': 'a', 'Email': 'email1@gmail.com', 'Source': '', 'Timestamp': '1',
-                'Ranking Score': 1, 'Justification': ''
+                'name': 'a', 'email': 'email1@gmail.com', 'source': '', 'timestamp': '1',
+                'ranking score': 1, 'justification': ''
             },
         ]
     ),
-    # bad input -- Timestamp is None
+    # bad input -- timestamp is None
     (
         [
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': None},
+            {'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': None},
         ],
         [
             {
-                'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1',
-                'Timestamp': '', 'Ranking Score': 1, 'Justification': 'source1'
+                'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1',
+                'timestamp': '', 'ranking score': 1, 'justification': 'source1'
             },
         ]
     ),
-    # bad input -- missing Name
+    # bad input -- missing name
     (
         [
-            {'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1'},
+            {'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1'},
         ],
         [
             {
-                'Name': '', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '1',
-                'Ranking Score': 1, 'Justification': 'source1'
+                'name': '', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
+                'ranking score': 1, 'justification': 'source1'
             },
         ]
     ),
-    # bad input -- missing Email
+    # bad input -- missing email
     (
         [
-            {'Name': 'a', 'Source': 'source1', 'Timestamp': '1'},
+            {'name': 'a', 'source': 'source1', 'timestamp': '1'},
         ],
         [
             {
-                'Name': 'a', 'Email': '', 'Source': 'source1', 'Timestamp': '1',
-                'Ranking Score': 1, 'Justification': 'source1'
+                'name': 'a', 'email': '', 'source': 'source1', 'timestamp': '1',
+                'ranking score': 1, 'justification': 'source1'
             },
         ]
     ),
-    # bad input -- missing Source
+    # bad input -- missing source
     (
         [
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Timestamp': '1'},
+            {'name': 'a', 'email': 'email1@gmail.com', 'timestamp': '1'},
         ],
         [
             {
-                'Name': 'a', 'Email': 'email1@gmail.com', 'Source': '', 'Timestamp': '1',
-                'Ranking Score': 1, 'Justification': ''
+                'name': 'a', 'email': 'email1@gmail.com', 'source': '', 'timestamp': '1',
+                'ranking score': 1, 'justification': ''
             },
         ]
     ),
-    # bad input -- missing Timestamp
+    # bad input -- missing timestamp
     (
         [
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1'},
+            {'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1'},
         ],
         [
             {
-                'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': '',
-                'Ranking Score': 1, 'Justification': 'source1'
+                'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '',
+                'ranking score': 1, 'justification': 'source1'
             },
         ]
     ),
-    # Timestamp as numerical type
+    # timestamp as numerical type
     (
         [
-            {'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': 1},
-            {'Name': 'a', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': 2},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': 1},
+            {'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': 2},
         ],
         [
             {
-                'Name': 'aa', 'Email': 'email1@gmail.com', 'Source': 'source1', 'Timestamp': 2,
-                'Ranking Score': 1.0, 'Justification': 'source1'
+                'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': 2,
+                'ranking score': 1.0, 'justification': 'source1'
             },
         ]
     ),

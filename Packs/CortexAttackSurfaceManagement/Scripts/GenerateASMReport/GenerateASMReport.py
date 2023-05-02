@@ -220,10 +220,10 @@ def build_template(args: Dict[str, Any]) -> List[Dict[str, Any]]:
                 "rowPos": 8,
                 "columnPos": 1,
                 "tableColumns": [
-                    "Action",
-                    "ActionTimestamp",
-                    "Outcome",
-                    "OutcomeTimestamp",
+                    "action",
+                    "actionyimestamp",
+                    "outcome",
+                    "outcomeTimestamp",
                 ],
                 "classes": "striped stackable",
             },
@@ -249,10 +249,10 @@ def build_template(args: Dict[str, Any]) -> List[Dict[str, Any]]:
                 "rowPos": 10,
                 "columnPos": 1,
                 "tableColumns": [
-                    "RuleName",
-                    "Criteria",
-                    "CreatedBy",
-                    "Action",
+                    "rulename",
+                    "criteria",
+                    "createdby",
+                    "action",
                 ],
                 "classes": "striped stackable",
             },
@@ -277,7 +277,7 @@ def build_template(args: Dict[str, Any]) -> List[Dict[str, Any]]:
             "layout": {
                 "rowPos": 12,
                 "columnPos": 1,
-                "tableColumns": ["Name", "Email", "Source", "Timestamp"],
+                "tableColumns": ["name", "email", "source", "timestamp"],
                 "classes": "striped stackable",
             },
         },
@@ -301,7 +301,7 @@ def build_template(args: Dict[str, Any]) -> List[Dict[str, Any]]:
             "layout": {
                 "rowPos": 14,
                 "columnPos": 1,
-                "tableColumns": ["Type", "Value", "URL", "Timestamp"],
+                "tableColumns": ["type", "value", "url", "timestamp"],
                 "classes": "striped stackable",
             },
         },
@@ -325,7 +325,7 @@ def build_template(args: Dict[str, Any]) -> List[Dict[str, Any]]:
             "layout": {
                 "rowPos": 16,
                 "columnPos": 1,
-                "tableColumns": ["Options", "Selected", "Answerer", "Timestamp"],
+                "tableColumns": ["options", "selected", "answerer", "timestamp"],
                 "classes": "striped stackable",
             },
         },
@@ -349,7 +349,7 @@ def build_template(args: Dict[str, Any]) -> List[Dict[str, Any]]:
             "layout": {
                 "rowPos": 18,
                 "columnPos": 1,
-                "tableColumns": ["Source", "IP"],
+                "tableColumns": ["source", "ip"],
                 "classes": "striped stackable",
             },
         },
@@ -374,11 +374,11 @@ def build_template(args: Dict[str, Any]) -> List[Dict[str, Any]]:
                 "rowPos": 20,
                 "columnPos": 1,
                 "tableColumns": [
-                    "Provider",
-                    "Organization",
-                    "Project",
-                    "Region",
-                    "Other",
+                    "provider",
+                    "organization",
+                    "project",
+                    "region",
+                    "other",
                 ],
                 "classes": "striped stackable",
             },
@@ -404,9 +404,9 @@ def build_template(args: Dict[str, Any]) -> List[Dict[str, Any]]:
                 "rowPos": 22,
                 "columnPos": 1,
                 "tableColumns": [
-                    "Key",
-                    "Value",
-                    "Source",
+                    "key",
+                    "value",
+                    "source",
                 ],
                 "classes": "striped stackable",
             },
@@ -432,9 +432,9 @@ def build_template(args: Dict[str, Any]) -> List[Dict[str, Any]]:
                 "rowPos": 24,
                 "columnPos": 1,
                 "tableColumns": [
-                    "Type",
-                    "ID",
-                    "Link",
+                    "type",
+                    "id",
+                    "link",
                 ],
                 "classes": "striped stackable",
             },
@@ -472,81 +472,81 @@ def get_asm_args(args: Dict[str, Any]) -> Dict[str, Any]:
     asm_args: Dict[str, Any] = {
         "asmserviceowner": args.get("asm_service_owner")
         if args.get("asm_service_owner")
-        else {"Email": "n/a", "Name": "n/a", "Source": "n/a", "Timestamp": "n/a"},
+        else {"email": "n/a", "name": "n/a", "source": "n/a", "timestamp": "n/a"},
         "asmcloud": (
             args.get("asm_cloud")
             if args.get("asm_cloud")
             else {
-                "Organization": "n/a",
-                "Other": "n/a",
-                "Project": "n/a",
-                "Provider": "n/a",
-                "Region": "n/a",
+                "organization": "n/a",
+                "other": "n/a",
+                "project": "n/a",
+                "provider": "n/a",
+                "region": "n/a",
             }
         ),
         "asmremediationpathrule":
             {
-                "RuleName": args.get("asm_remediation_path_rule", {}).get("rule_name"),
-                "Criteria": RPR_criteria(args.get("asm_remediation_path_rule", {}).get("criteria")),
-                "CreatedBy": args.get("asm_remediation_path_rule", {}).get("created_by_pretty"),
-                "Action": args.get("asm_remediation_path_rule", {}).get("action")
+                "rulename": args.get("asm_remediation_path_rule", {}).get("rule_name"),
+                "criteria": RPR_criteria(args.get("asm_remediation_path_rule", {}).get("criteria")),
+                "createdBy": args.get("asm_remediation_path_rule", {}).get("created_by_pretty"),
+                "action": args.get("asm_remediation_path_rule", {}).get("action")
         }
             if args.get("asm_remediation_path_rule")
             else {
-            "RuleName": "n/a",
-            "Criteria": "n/a",
-            "CreatedBy": "n/a",
-            "Action": "n/a"
+            "rulename": "n/a",
+            "criteria": "n/a",
+            "createdby": "n/a",
+            "action": "n/a"
         },
         "asmdatacollection": args.get("asm_data_collection")
         if args.get("asm_data_collection")
         else {
-            "Answerer": "n/a",
-            "Options": "n/a",
-            "Selected": "n/a",
-            "Timestamp": "n/a",
+            "answerer": "n/a",
+            "options": "n/a",
+            "selected": "n/a",
+            "timestamp": "n/a",
         },
         "asmnotification": args.get("asm_notification")
         if args.get("asm_notification")
         else {
-            "Timestamp": "n/a",
-            "Type": "n/a",
-            "Url": "n/a",
-            "Value": "n/a",
+            "timestamp": "n/a",
+            "type": "n/a",
+            "url": "n/a",
+            "value": "n/a",
         },
         "asmprivateip": args.get("asm_private_ip")
         if args.get("asm_private_ip")
-        else {"IP": "n/a", "Source": "n/a"},
+        else {"ip": "n/a", "source": "n/a"},
         "asmremediation": args.get("asm_remediation")
         if args.get("asm_remediation")
         else {
-            "Action": "n/a",
-            "ActionTimestamp": "n/a",
-            "Outcome": "n/a",
-            "OutcomeTimestamp": "n/a",
+            "action": "n/a",
+            "actiontimestamp": "n/a",
+            "outcome": "n/a",
+            "outcometimestamp": "n/a",
         },
         "asmservicedetection": args.get("asm_service_detection")
         if args.get("asm_service_detection")
         else {
-            "ScanDone": "n/a",
-            "ScanNum": "n/a",
-            "ScanResult": "n/a",
-            "ScanState": "n/a",
-            "Timestamp": "n/a",
+            "scandone": "n/a",
+            "scannum": "n/a",
+            "scanresult": "n/a",
+            "scanstate": "n/a",
+            "timestamp": "n/a",
         },
         "asmsystemids": args.get("asm_system_ids")
         if args.get("asm_system_ids")
         else {
-            "ID": "n/a",
-            "Link": "n/a",
-            "Type": "n/a",
+            "id": "n/a",
+            "link": "n/a",
+            "type": "n/a",
         },
         "asmtags": args.get("asm_tags")
         if args.get("asm_tags")
-        else {"Key": "n/a", "Value": "n/a", "Source": "n/a"},
+        else {"key": "n/a", "value": "n/a", "source": "n/a"},
         "asmrelated": args.get("asmrelated")
         if args.get("asmrelated")
-        else {"Type": "n/a", "Link": "n/a"},
+        else {"type": "n/a", "link": "n/a"},
     }
 
     for arg in asm_args:
