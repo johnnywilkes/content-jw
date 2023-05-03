@@ -400,7 +400,7 @@ tasks:
       gridfield:
         simple: asmservicedetection
       keys:
-        simple: ScanNum,ScanDone,ScanResult,Timestamp,ScanState
+        simple: scannum,scandone,scanresult,timestamp,scanstate
       val1:
         complex:
           root: inputs.ScanNumber
@@ -526,7 +526,7 @@ tasks:
       gridfield:
         simple: asmservicedetection
       keys:
-        simple: ScanNum,ScanDone,ScanResult,Timestamp,ScanState
+        simple: scannum,scandone,scanresult,timestamp,scanstate
       val1:
         complex:
           root: inputs.ScanNumber
@@ -711,7 +711,7 @@ tasks:
       gridfield:
         simple: asmservicedetection
       keys:
-        simple: ScanNum,ScanDone,ScanResult,Timestamp,ScanState
+        simple: scannum,scandone,scanresult,timestamp,scanstate
       val1:
         complex:
           root: inputs.ScanNumber
@@ -797,7 +797,7 @@ tasks:
       gridfield:
         simple: asmservicedetection
       keys:
-        simple: ScanNum,ScanDone,ScanResult,Timestamp,ScanState
+        simple: scannum,scandone,scanresult,timestamp,scanstate
       val1:
         complex:
           root: inputs.ScanNumber
@@ -850,7 +850,7 @@ tasks:
       gridfield:
         simple: asmsystemids
       keys:
-        simple: Type,ID,Link
+        simple: type,id,link
       val1:
         simple: S3-BucketName
       val2:

@@ -11,14 +11,14 @@ from contextlib import nullcontext as does_not_raise
         [
             {
                 'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1',
-                'timestamp': '', 'ranking score': 1, 'justification': 'source1'
+                'timestamp': '', 'rankingscore': 1, 'justification': 'source1'
             },
         ],
         1,
         [
             {
                 'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1',
-                'timestamp': '', 'ranking score': 1, 'justification': 'source1'
+                'timestamp': '', 'rankingscore': 1, 'justification': 'source1'
             },
         ],
         does_not_raise(),
@@ -27,7 +27,7 @@ from contextlib import nullcontext as does_not_raise
         [
             {
                 'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1',
-                'timestamp': '', 'ranking score': 1, 'justification': 'source1'
+                'timestamp': '', 'rankingscore': 1, 'justification': 'source1'
             },
         ],
         0,
@@ -38,7 +38,7 @@ from contextlib import nullcontext as does_not_raise
         [
             {
                 'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1',
-                'timestamp': '', 'ranking score': 1, 'justification': 'source1'
+                'timestamp': '', 'rankingscore': 1, 'justification': 'source1'
             },
         ],
         -1,
@@ -177,8 +177,8 @@ def test_aggregate(owners, expected_out):
             {'name': 'aa', 'email': '', 'source': 'source3 | source4', 'timestamp': '4', 'count': 2},
         ],
         [
-            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1 | source2', 'timestamp': '2', 'ranking score': 1.0},
-            {'name': 'aa', 'email': '', 'source': 'source3 | source4', 'timestamp': '4', 'ranking score': 1.0},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1 | source2', 'timestamp': '2', 'rankingscore': 1.0},
+            {'name': 'aa', 'email': '', 'source': 'source3 | source4', 'timestamp': '4', 'rankingscore': 1.0},
         ]
     ),
     # unequal counts
@@ -188,8 +188,8 @@ def test_aggregate(owners, expected_out):
             {'name': 'aa', 'email': '', 'source': 'source3 | source4', 'timestamp': '4', 'count': 2},
         ],
         [
-            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '2', 'ranking score': 0.5},
-            {'name': 'aa', 'email': '', 'source': 'source3 | source4', 'timestamp': '4', 'ranking score': 1.0},
+            {'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '2', 'rankingscore': 0.5},
+            {'name': 'aa', 'email': '', 'source': 'source3 | source4', 'timestamp': '4', 'rankingscore': 1.0},
         ]
     ),
     # empty owners
@@ -212,7 +212,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
-                'ranking score': 1.0, 'justification': 'source1'
+                'rankingscore': 1.0, 'justification': 'source1'
             },
         ]
     ),
@@ -230,7 +230,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
-                'ranking score': 1, 'justification': 'source1', 'new field': 'val1 | val2'
+                'rankingscore': 1, 'justification': 'source1', 'new field': 'val1 | val2'
             },
         ]
     ),
@@ -243,7 +243,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
-                'ranking score': 1, 'justification': 'source1', 'new field': 2,
+                'rankingscore': 1, 'justification': 'source1', 'new field': 2,
             },
         ]
     ),
@@ -256,7 +256,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
-                'ranking score': 1, 'justification': 'source1', 'new field': 1,
+                'rankingscore': 1, 'justification': 'source1', 'new field': 1,
             },
         ]
     ),
@@ -269,7 +269,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
-                'ranking score': 1, 'justification': 'source1', 'new field': 'val1',
+                'rankingscore': 1, 'justification': 'source1', 'new field': 'val1',
             },
         ]
     ),
@@ -282,7 +282,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
-                'ranking score': 1, 'justification': 'source1',
+                'rankingscore': 1, 'justification': 'source1',
             },
         ]
     ),
@@ -304,7 +304,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': '', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
-                'ranking score': 1, 'justification': 'source1'
+                'rankingscore': 1, 'justification': 'source1'
             },
         ]
     ),
@@ -316,7 +316,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'a', 'email': None, 'source': 'source1', 'timestamp': '1',
-                'ranking score': 1, 'justification': 'source1'
+                'rankingscore': 1, 'justification': 'source1'
             },
         ]
     ),
@@ -328,7 +328,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'a', 'email': 'email1@gmail.com', 'source': '', 'timestamp': '1',
-                'ranking score': 1, 'justification': ''
+                'rankingscore': 1, 'justification': ''
             },
         ]
     ),
@@ -340,7 +340,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1',
-                'timestamp': '', 'ranking score': 1, 'justification': 'source1'
+                'timestamp': '', 'rankingscore': 1, 'justification': 'source1'
             },
         ]
     ),
@@ -352,7 +352,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': '', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '1',
-                'ranking score': 1, 'justification': 'source1'
+                'rankingscore': 1, 'justification': 'source1'
             },
         ]
     ),
@@ -364,7 +364,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'a', 'email': '', 'source': 'source1', 'timestamp': '1',
-                'ranking score': 1, 'justification': 'source1'
+                'rankingscore': 1, 'justification': 'source1'
             },
         ]
     ),
@@ -376,7 +376,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'a', 'email': 'email1@gmail.com', 'source': '', 'timestamp': '1',
-                'ranking score': 1, 'justification': ''
+                'rankingscore': 1, 'justification': ''
             },
         ]
     ),
@@ -388,7 +388,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'a', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': '',
-                'ranking score': 1, 'justification': 'source1'
+                'rankingscore': 1, 'justification': 'source1'
             },
         ]
     ),
@@ -401,7 +401,7 @@ def test_score(deduplicated, expected_out):
         [
             {
                 'name': 'aa', 'email': 'email1@gmail.com', 'source': 'source1', 'timestamp': 2,
-                'ranking score': 1.0, 'justification': 'source1'
+                'rankingscore': 1.0, 'justification': 'source1'
             },
         ]
     ),

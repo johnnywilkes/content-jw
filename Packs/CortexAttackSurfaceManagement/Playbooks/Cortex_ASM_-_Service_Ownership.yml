@@ -166,7 +166,7 @@ tasks:
       gridfield:
         simple: asmserviceowner
       keys:
-        simple: Name,Email,Source,Timestamp
+        simple: name,email,source,timestamp
       val1:
         simple: n/a
       val2:
@@ -274,7 +274,7 @@ tasks:
           - args:
               field:
                 value:
-                  simple: Name
+                  simple: name
             operator: getField
       val2:
         complex:
@@ -284,7 +284,7 @@ tasks:
           - args:
               field:
                 value:
-                  simple: Email
+                  simple: email
             operator: getField
       val3:
         complex:
@@ -294,7 +294,7 @@ tasks:
           - args:
               field:
                 value:
-                  simple: Source
+                  simple: source
             operator: getField
       val4:
         complex:
@@ -304,7 +304,7 @@ tasks:
           - args:
               field:
                 value:
-                  simple: Timestamp
+                  simple: timestamp
             operator: getField
     separatecontext: false
     skipunavailable: true

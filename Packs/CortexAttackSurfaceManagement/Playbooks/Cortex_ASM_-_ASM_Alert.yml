@@ -826,7 +826,7 @@ tasks:
       gridfield:
         simple: asmdatacollection
       keys:
-        simple: Options,Selected,Answerer,Timestamp
+        simple: options,selected,answerer,timestamp
       val1:
         simple: What remediation action would you like to take?
       val2:
@@ -1202,7 +1202,7 @@ tasks:
       gridfield:
         simple: asmnotification
       keys:
-        simple: Type,Value,URL,Timestamp
+        simple: type,value,url,timestamp
       val1:
         simple: Email
       val2:
@@ -1383,7 +1383,7 @@ tasks:
       gridfield:
         simple: asmremediation
       keys:
-        simple: Action,ActionTimestamp,Outcome,OutcomeTimestamp
+        simple: action,actiontimestamp,outcome,outcometimestamp
       val1:
         simple: close service port from internet
       val2:
@@ -1438,7 +1438,7 @@ tasks:
       gridfield:
         simple: asmremediation
       keys:
-        simple: Action,ActionTimestamp,Outcome,OutcomeTimestamp
+        simple: action,actiontimestamp,outcome,outcometimestamp
       val1:
         simple: Manual remediation
       val2:
@@ -1585,7 +1585,7 @@ tasks:
       gridfield:
         simple: asmremediation
       keys:
-        simple: Action,ActionTimestamp,Outcome,OutcomeTimestamp
+        simple: action,actiontimestamp,outcome,outcometimestamp
       val1:
         complex:
           root: alert.asmnotification
@@ -1647,7 +1647,7 @@ tasks:
       gridfield:
         simple: asmalertsummary
       keys:
-        simple: Link,EntryID
+        simple: link,entryid
       val1:
         complex:
           root: demistoUrls
@@ -2081,7 +2081,7 @@ tasks:
       gridfield:
         simple: asmnotification
       keys:
-        simple: Type,Value,URL,Timestamp
+        simple: type,value,url,timestamp
       val1:
         simple: ServiceNow
       val2:
@@ -2413,7 +2413,7 @@ tasks:
       gridfield:
         simple: asmremediation
       keys:
-        simple: Action,ActionTimestamp,Outcome,OutcomeTimestamp
+        simple: action,actiontimestamp,outcome,outcometimestamp
       val1:
         simple: Manual remediation
       val2:
