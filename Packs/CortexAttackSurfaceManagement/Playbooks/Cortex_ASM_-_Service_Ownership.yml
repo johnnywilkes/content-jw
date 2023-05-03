@@ -45,7 +45,7 @@ tasks:
                 - - left:
                       iscontext: true
                       value:
-                        simple: alert.asmserviceowner.Source
+                        simple: alert.asmserviceowner.source
                     operator: startWith
                     right:
                       value:
@@ -103,7 +103,7 @@ tasks:
           - - left:
                 iscontext: true
                 value:
-                  simple: alert.asmserviceowner.Source
+                  simple: alert.asmserviceowner.source
               operator: startWith
               right:
                 value:
