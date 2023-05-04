@@ -221,9 +221,9 @@ def build_template(args: Dict[str, Any]) -> List[Dict[str, Any]]:
                 "columnPos": 1,
                 "tableColumns": [
                     "action",
-                    "actionyimestamp",
+                    "actiontimestamp",
                     "outcome",
-                    "outcomeTimestamp",
+                    "outcometimestamp",
                 ],
                 "classes": "striped stackable",
             },
