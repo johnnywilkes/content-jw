@@ -1,4 +1,4 @@
-version: 2.1
+testversion: 2.1
 orbs:
   python: circleci/python@<< pipeline.parameters.python-orb-version >>
   node: circleci/node@<< pipeline.parameters.node-orb-version >>
